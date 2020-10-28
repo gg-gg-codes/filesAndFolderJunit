@@ -1,8 +1,7 @@
 package fileandfoldersjunit;
 
-import java.io.File;
-import java.io.IOException;
- 
+import java.io.*;
+
 import junit.framework.Assert;
  
 import org.apache.commons.io.FileUtils;
@@ -28,7 +27,17 @@ public class TemporaryFolderTest {
    
      // Verify the content
      Assert.assertEquals("hello world", s);
-      
-     //Note: File is guaranteed to be deleted after the test finishes.
+     ClassLoader classLoader= getClass().getClassLoader();
+       InputStream resourceAsStream = classLoader.getResourceAsStream("test10.txt");
+       InputStreamReader isReader = new InputStreamReader(resourceAsStream);
+       //Creating a BufferedReader object
+       BufferedReader reader = new BufferedReader(isReader);
+       StringBuffer sb = new StringBuffer();
+       String str;
+       while((str = reader.readLine())!= null){
+           sb.append(str);
+       }
+       System.out.println("");
+       //Note: File is guaranteed to be deleted after the test finishes.
    }
  }
